@@ -34,11 +34,6 @@
 		<link id="wsite-base-style" rel="stylesheet" type="text/css" href="./index_files/sites.css">
 <link rel="stylesheet" type="text/css" href="./index_files/social-icons.css" media="screen,projection">
 <link rel="stylesheet" type="text/css" href="./index_files/main_style.css" title="wsite-theme-css">
-<link href="./index_files/font.css" rel="stylesheet" type="text/css">
-<link href="./index_files/font(1).css" rel="stylesheet" type="text/css">
-<link href="./index_files/font(2).css" rel="stylesheet" type="text/css">
-
-<link href="./index_files/font(3).css" rel="stylesheet" type="text/css">
 <style type="text/css">
 .wsite-elements.wsite-not-footer:not(.wsite-header-elements) div.paragraph,
 .wsite-elements.wsite-not-footer:not(.wsite-header-elements) p,
@@ -60,6 +55,94 @@
 .wsite-headline-paragraph,
 .wsite-header-section .paragraph {
   font-family:"Karla" !important;
+}
+.about-intro {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:72px;
+  padding:72px 56px;
+  margin:32px 0 48px;
+  background:#f6f3ee;
+  border-radius:28px;
+}
+.about-intro__media {
+  flex:0 0 260px;
+}
+.about-intro__avatar {
+  width:260px;
+  height:260px;
+  object-fit:cover;
+  display:block;
+  border-radius:32px;
+  background:#fff;
+  box-shadow:0 16px 40px rgba(31, 24, 16, 0.06);
+}
+.about-intro__content {
+  flex:1;
+  max-width:620px;
+  font-family:"Droid Sans Mono" !important;
+}
+.about-intro__title {
+  margin:0 0 22px;
+  font-size:56px;
+  line-height:1.05;
+  color:#111;
+  font-weight:600;
+}
+.about-intro__text {
+  margin:0 0 28px;
+  font-size:18px;
+  line-height:1.75;
+  color:#111111;
+  font-weight:400;
+}
+.about-intro__contact {
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-top:12px;
+  color:#111111;
+  font-size:18px;
+  font-weight:400;
+}
+.about-intro__contact-link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  border-radius:999px;
+  background:#fff;
+  color:#111;
+  text-decoration:none;
+  box-shadow:0 10px 24px rgba(31, 24, 16, 0.08);
+}
+.about-intro__contact-link:hover {
+  color:#111;
+  opacity:0.9;
+}
+@media screen and (max-width: 900px) {
+  .about-intro {
+    flex-direction:column;
+    align-items:flex-start;
+    gap:36px;
+    padding:36px 24px;
+  }
+  .about-intro__media {
+    flex-basis:auto;
+  }
+  .about-intro__avatar {
+    width:min(260px, 100%);
+    height:auto;
+    aspect-ratio:1 / 1;
+  }
+  .about-intro__title {
+    font-size:40px;
+  }
+  .about-intro__text {
+    font-size:16px;
+  }
 }
 </style>
 
@@ -160,6 +243,23 @@ var STYLE_PREFIX = 'wsite';
         <div class="container">
 			<div class="wsite-section-elements">
 				<div><div class="wsite-image wsite-image-border-none" style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:inherit"><img src="./image/hero-banner.png" alt="Picture" style="width:1070;max-width:100%"></div></div>
+
+<section class="about-intro">
+  <div class="about-intro__media">
+    <img class="about-intro__avatar" src="./image/img-10.webp" alt="关于我头像">
+  </div>
+  <div class="about-intro__content">
+    <h2 class="about-intro__title">关于我</h2>
+    <p class="about-intro__text">我是一名游戏开发者，热衷于探索游戏作为艺术媒介的边界。从解谜到冒险，从模拟到角色扮演，我喜欢各种类型的游戏，享受创造每段独特的故事。</p>
+    <p class="about-intro__text">每一款作品都是一次实验，一次与玩家心灵的对话。我相信游戏不仅仅是娱乐，更是连接创作者与体验者的桥梁。</p>
+    <div class="about-intro__contact">
+      <span>联系我:</span>
+      <a class="about-intro__contact-link" href="mailto:aidendenden233@outlook.com" aria-label="发送邮件">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M20 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 2v.01L12 12 4 7.01V7h16zM4 17V9.24l7.4 4.63a1 1 0 0 0 1.2 0L20 9.24V17H4z"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
 
 <div class="wsite-spacer" style="height:100px;"></div>
 
@@ -340,7 +440,7 @@ var STYLE_PREFIX = 'wsite';
 <a class="first-child wsite-social-item" href="http://www.linkedin.com/in/Aidendenden" target="_blank" aria-label="LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:30px;color:#388abe;text-decoration:none;">
 <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3A2.03 2.03 0 1 0 5.3 7.06 2.03 2.03 0 0 0 5.25 3zM20.44 12.62c0-3.46-1.85-5.07-4.32-5.07-1.99 0-2.88 1.09-3.38 1.86V8.5H9.36c.04.6 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.68.12-.92.27-.68.88-1.38 1.91-1.38 1.35 0 1.89 1.03 1.89 2.53V20h3.38v-7.38z"></path></svg>
 </a>
-<a class="last-child wsite-social-item" href="mailto:xixden@iCloud.com" target="_blank" aria-label="Mail" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:30px;color:#363b3e;text-decoration:none;">
+<a class="last-child wsite-social-item" href="mailto:aidendenden233@outlook.com" target="_blank" aria-label="Mail" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:30px;color:#363b3e;text-decoration:none;">
 <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M20 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 2v.01L12 12 4 7.01V7h16zM4 17V9.24l7.4 4.63a1 1 0 0 0 1.2 0L20 9.24V17H4z"></path></svg>
 </a>
 </span>
