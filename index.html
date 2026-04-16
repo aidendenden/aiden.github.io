@@ -122,6 +122,47 @@
   color:#111;
   opacity:0.9;
 }
+.work-extra-grid {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:20px;
+  margin:32px 0 0;
+}
+.work-extra-card {
+  display:block;
+  overflow:hidden;
+  border:1px solid #ece7df;
+  border-radius:24px;
+  background:#faf8f4;
+  text-decoration:none;
+}
+.work-extra-card:hover {
+  color:#262626;
+  border-color:#d8d0c4;
+}
+.work-extra-card__title {
+  margin:0 0 10px;
+  font-family:"Karla",sans-serif;
+  font-size:28px;
+  line-height:1.15;
+  color:#111;
+}
+.work-extra-card__image {
+  display:block;
+  width:100%;
+  aspect-ratio:16 / 10;
+  object-fit:cover;
+  background:#eee8df;
+}
+.work-extra-card__body {
+  padding:20px 22px 24px;
+}
+.work-extra-card__desc {
+  margin:0;
+  font-size:16px;
+  line-height:1.7;
+  color:#555;
+}
 @media screen and (max-width: 900px) {
   .about-intro {
     flex-direction:column;
@@ -142,6 +183,17 @@
   }
   .about-intro__text {
     font-size:16px;
+  }
+  .work-extra-grid {
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+  .work-extra-card__title {
+    font-size:24px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .work-extra-grid {
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -267,142 +319,99 @@ var STYLE_PREFIX = 'wsite';
 
 <div class="wsite-spacer" style="height:100px;"></div>
 
-<div><div class="wsite-multicol"><div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
-	<table class="wsite-multicol-table">
-		<tbody class="wsite-multicol-tbody">
-			<tr class="wsite-multicol-tr">
-				<td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-					
-						
-
-<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
-<a href="https://beta.gcores.com/games/114568" target="_blank">
-<img src="./image/project-heat.png" alt="图片" style="width:auto;max-width:100%">
-</a>
-<div style="display:block;font-size:90%"></div>
-</div></div>
-
-<h2 class="wsite-content-title" style="text-align:center;">《热量吸收模拟器》</h2>
-
-<div class="paragraph" style="text-align:center;"><a href="https://beta.gcores.com/games/114568" target="_blank">好热呀！！！</a></div>
-
-<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:right">
-<a href="https://www.gcores.com/games/111042" target="_blank">
-<img src="./image/project-puzzle.png" alt="Picture" style="width:auto;max-width:100%">
-</a>
-<div style="display:block;font-size:90%"></div>
-</div></div>
-
-<h2 class="wsite-content-title" style="text-align:center;"><strong><font size="4">《Puzzle》</font></strong></h2>
-
-<div class="paragraph" style="text-align:center;">你好，我是源。 该怎么称呼你呢？​</div>
-
-
-					
-				</td>				<td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-					
-						
-
-<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
-<a href="https://www.gcores.com/games/113349" target="_blank">
-<img src="./image/project-d6x2.jpg" alt="图片" style="width:1070;max-width:100%">
-</a>
-<div style="display:block;font-size:90%"></div>
-</div></div>
-
-<h2 class="wsite-content-title" style="text-align:center;">《D6X2》</h2>
-
-<div class="paragraph" style="text-align:center;"><font color="#2a2a2a"><a href="https://www.gcores.com/games/113349" target="_blank">恶魔代表惩罚 天使代表奖励</a></font></div>
-
-<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
-<a href="https://www.gcores.com/games/110289" target="_blank">
-<img src="./image/project-04.webp" alt="图片" style="width:auto;max-width:100%">
-</a>
-<div style="display:block;font-size:90%"></div>
-</div></div>
-
-<h2 class="wsite-content-title" style="text-align:center;"><font size="4">《错位的酒桌边界》</font></h2>
-
-<div class="paragraph" style="text-align:center;"><a href="https://www.gcores.com/games/110289" target="_blank">喝！接着喝！</a></div>
-
-<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:right">
-<a href="https://www.gcores.com/games/108071" target="_blank">
-<img src="./image/project-momoeo.webp" alt="图片" style="width:auto;max-width:100%">
-</a>
-<div style="display:block;font-size:90%"></div>
-</div></div>
-
-<h2 class="wsite-content-title" style="text-align:center;"><font size="4">《MOMOEO》</font></h2>
-
-<div class="paragraph" style="text-align:center;"><a href="https://www.gcores.com/games/108071" target="_blank">摸摸摸摸摸摸摸摸摸鱼</a></div>
-
-
-					
-				</td>			</tr>
-		</tbody>
-	</table>
-</div></div></div>
-
-<div><div class="wsite-multicol"><div class="wsite-multicol-table-wrap" style="margin:0 -5px;">
-	<table class="wsite-multicol-table">
-		<tbody class="wsite-multicol-tbody">
-			<tr class="wsite-multicol-tr">
-				<td class="wsite-multicol-col" style="width:32.727272727273%; padding:0 5px;">
-					
-						
-
-<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:right">
-<a href="https://www.gcores.com/games/105371" target="_blank">
-<img src="./image/project-no-toilet.webp" alt="图片" style="width:auto;max-width:100%">
-</a>
-<div style="display:block;font-size:90%"></div>
-</div></div>
-
-<div class="paragraph" style="text-align:center;"><strong><font size="4" color="#2a2a2a">《禁止如厕》</font></strong></div>
-
-<div class="paragraph" style="text-align:center;"><u><font size="4">半夜三更受到了原始的召唤</font></u></div>
-
-
-					
-				</td>				<td class="wsite-multicol-col" style="width:34.545454545455%; padding:0 5px;">
-					
-						
-
-<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
-<a href="https://www.gcores.com/games/111044" target="_blank">
-<img src="./image/project-super-happy-man.png" alt="Picture" style="width:auto;max-width:100%">
-</a>
-<div style="display:block;font-size:90%"></div>
-</div></div>
-
-<h2 class="wsite-content-title" style="text-align:center;"><strong><font size="4">《开心超人》</font></strong></h2>
-
-<div class="paragraph" style="text-align:center;">找回我的”初心“</div>
-
-
-					
-				</td>				<td class="wsite-multicol-col" style="width:32.727272727273%; padding:0 5px;">
-					
-						
-
-<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
-<a href="https://www.gcores.com/games/111043" target="_blank">
-<img src="./image/project-slider-city.png" alt="Picture" style="width:auto;max-width:100%">
-</a>
-<div style="display:block;font-size:90%"></div>
-</div></div>
-
-<h2 class="wsite-content-title" style="text-align:center;"><strong><font size="4">《滑块城》</font></strong></h2>
-
-<div class="paragraph" style="text-align:center;"><span><font size="4">前面就是滑块城了！可以使用地图了！</font></span></div>
-
-
-					
-				</td>			</tr>
-		</tbody>
-	</table>
-</div></div></div>
-
+<div class="work-extra-grid">
+  <a class="work-extra-card" href="https://beta.gcores.com/games/114568" target="_blank">
+    <img class="work-extra-card__image" src="./image/project-heat.png" alt="《热量吸收模拟器》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《热量吸收模拟器》</h3>
+      <p class="work-extra-card__desc">好热噜！！！</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/111042" target="_blank">
+    <img class="work-extra-card__image" src="./image/project-puzzle.png" alt="《Puzzle》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《Puzzle》</h3>
+      <p class="work-extra-card__desc">你好，我是源。该怎么称呼你呢？</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/113349" target="_blank">
+    <img class="work-extra-card__image" src="./image/project-d6x2.jpg" alt="《D6X2》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《D6X2》</h3>
+      <p class="work-extra-card__desc">恶魔代表惩罚 天使代表奖励</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/110289" target="_blank">
+    <img class="work-extra-card__image" src="./image/project-04.webp" alt="《错位的酒桌边界》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《错位的酒桌边界》</h3>
+      <p class="work-extra-card__desc">喝！接着喝！</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/108071" target="_blank">
+    <img class="work-extra-card__image" src="./image/project-momoeo.webp" alt="《MOMOEO》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《MOMOEO》</h3>
+      <p class="work-extra-card__desc">摸摸摸摸摸摸摸摸摸鱼</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/105371" target="_blank">
+    <img class="work-extra-card__image" src="./image/project-no-toilet.webp" alt="《No-Toilet》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《No-Toilet》</h3>
+      <p class="work-extra-card__desc">半夜三更又听到了原始的召唤</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/111044" target="_blank">
+    <img class="work-extra-card__image" src="./image/project-super-happy-man.png" alt="《开心超人》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《开心超人》</h3>
+      <p class="work-extra-card__desc">找回我的“初心”</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/111043" target="_blank">
+    <img class="work-extra-card__image" src="./image/project-slider-city.png" alt="《滑块城》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《滑块城》</h3>
+      <p class="work-extra-card__desc">前面就是滑块城了！可以使用地图了！</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/150042" target="_blank">
+    <img class="work-extra-card__image" src="./image/img-08.webp" alt="《拼好人》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《拼好人》</h3>
+      <p class="work-extra-card__desc">是兄弟就砍一刀</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/149509" target="_blank">
+    <img class="work-extra-card__image" src="./image/img-06.webp" alt="《寿司不服输》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《寿司不服输》</h3>
+      <p class="work-extra-card__desc">一起来品尝 欧码卡塞吧！！！</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/138770" target="_blank">
+    <img class="work-extra-card__image" src="./image/img-03.webp" alt="《矿灯》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《矿灯》</h3>
+      <p class="work-extra-card__desc">迎来玩家所操控的主角的命运。</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/133587" target="_blank">
+    <img class="work-extra-card__image" src="./image/img-07.gif" alt="《维度漂流》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《维度漂流》</h3>
+      <p class="work-extra-card__desc">漂流于不同的维度 风格 交互 平台</p>
+    </div>
+  </a>
+  <a class="work-extra-card" href="https://www.gcores.com/games/133700" target="_blank">
+    <img class="work-extra-card__image" src="./image/img-11.webp" alt="《脑史王》封面">
+    <div class="work-extra-card__body">
+      <h3 class="work-extra-card__title">《脑史王》</h3>
+      <p class="work-extra-card__desc">史莱姆医生进入患者的大脑治愈患者</p>
+    </div>
+  </a>
+</div>
 <div class="wsite-spacer" style="height:87px;"></div>
 			</div>
 		</div>
