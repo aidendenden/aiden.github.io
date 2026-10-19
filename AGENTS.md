@@ -37,7 +37,7 @@ When a push fails, give the owner two things: the push command, and
   - The `"Instrument Serif Fallback"` face is local fonts with `size-adjust: 76%`, so line breaks stay the
     same when the webfont is blocked.
   - Noto Serif SC is requested by the script at the bottom, with `&text=` set to exactly the glyphs found in
-    `.hero-role, .sec-title, .work-title, .pullquote p`. New titles are picked up automatically. Don't
+    `.hero-role, .sec-title, .work-title`. New titles are picked up automatically. Don't
     replace this with a full CJK font load.
 - **Fallbacks for old browsers**: domestic Chinese browsers often run older Chromium, so there are physical
   properties instead of `margin-inline`/`inset`, and `@supports` fallbacks for `aspect-ratio` and
@@ -66,8 +66,6 @@ Follow the HTML comment just above `<ol class="works">`:
 ### Edit copy
 - Don't invent biography, dates, awards or stats.
 - The approved copy comes from the owner or `BLOG_DESIGN.md`.
-- The Wittgenstein quote's book is 《逻辑哲学论》. Each half is wrapped in `.qc` spans so phones break at the
-  clauses.
 
 ### Change sections or the nav
 - Nav links point to `#about`, `#work`, `#guestbook`, `#contact`.

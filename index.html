@@ -104,7 +104,6 @@
   --fs-h2:      clamp(38px, 3.4vw + 20px, 70px);
   --fs-display: clamp(54px, 7vw + 6px, 112px);
   --fs-name:    clamp(24px, .9vw + 18px, 34px);
-  --fs-quote:   clamp(19px, 1.1vw + 14px, 30px);
   --fs-email:   clamp(27px, 3.6vw + 13px, 66px);
   --lh-body:    1.85;
 
@@ -802,68 +801,6 @@ html:not(.js) .theme-toggle { display: none; }
 .work a:focus-visible, .feature-link:focus-visible { outline-offset: 8px; border-radius: var(--r-md); }
 
 /* ==========================================================================
-   8. Pull-quote
-   ========================================================================== */
-.quote-band {
-  margin-top: var(--section-y);
-  padding-top: clamp(56px, 4vw + 32px, 96px);
-  padding-bottom: clamp(56px, 4vw + 32px, 96px);
-  background: var(--paper-2);
-  border-top: 1px solid var(--rule-soft);
-  border-bottom: 1px solid var(--rule-soft);
-}
-@supports (background: color-mix(in srgb, red 50%, transparent)) {
-  .quote-band { background: color-mix(in srgb, var(--paper-2) 78%, transparent); }
-}
-.pullquote {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--col-gap);
-}
-.pullquote blockquote {
-  position: relative;
-  grid-column: 3 / span 9;
-}
-.pullquote .qmark {
-  position: absolute;
-  top: -.06em;
-  right: calc(100% + .12em);
-  font-family: var(--f-display);
-  font-size: clamp(64px, 4vw + 36px, 120px);
-  line-height: .8;
-  color: var(--accent);
-  user-select: none;
-}
-.pullquote p {
-  font-family: var(--f-serif);
-  font-weight: 400;
-  font-size: var(--fs-quote);
-  line-height: 1.62;
-  letter-spacing: .03em;
-  color: var(--ink);
-}
-.pullquote .ql { display: block; }
-.pullquote .ql + .ql { padding-left: 2em; }
-.pullquote figcaption {
-  grid-column: 3 / span 9;
-  display: flex;
-  align-items: center;
-  gap: var(--s-4);
-  margin-top: clamp(20px, 1vw + 14px, 32px);
-  color: var(--ink-2);
-  font-size: 15px;
-  letter-spacing: .06em;
-}
-.pullquote figcaption::before {
-  content: "";
-  width: 48px;
-  height: 1px;
-  background: var(--accent);
-}
-.pullquote cite { font-style: normal; }
-
-/* ==========================================================================
    9. Contact
    ========================================================================== */
 .contact .grid { row-gap: var(--s-6); }
@@ -1078,7 +1015,6 @@ html:not(.js) .theme-toggle { display: none; }
   .works .work:nth-child(3n+2), .works .work:nth-child(3n) { --d: 0s; }
   .works .work:nth-child(2n) { --d: .08s; }
 
-  .pullquote blockquote, .pullquote figcaption { grid-column: 2 / -1; }
 }
 
 @media (max-width: 899px) {
@@ -1126,10 +1062,6 @@ html:not(.js) .theme-toggle { display: none; }
   .works .work { --d: 0s !important; }
   .work-meta { margin-top: var(--s-3); }
 
-  .pullquote { display: block; }
-  .pullquote .qmark { position: static; display: block; height: .42em; font-size: 64px; }
-  .pullquote .ql + .ql { padding-left: 0; margin-top: .6em; }
-  .pullquote .qc { display: block; }      /* break at the clauses, flush left */
 
   .links a { grid-template-columns: 1fr auto; row-gap: 4px; }
   .links .l-name { grid-column: 1; }
@@ -1390,19 +1322,6 @@ html:not(.js) .theme-toggle { display: none; }
     </div>
   </section>
 
-  <!-- ============================== Quote ============================== -->
-  <section class="quote-band" aria-label="引言">
-    <div class="wrap">
-      <figure class="pullquote reveal">
-        <blockquote>
-          <span class="qmark" aria-hidden="true">“</span>
-          <p><span class="ql"><span class="sr-only">“</span><span class="qc">凡是能够说清楚的，</span><span class="qc">都能说清楚；</span></span><span class="ql"><span class="qc">凡是无法解释的，</span><span class="qc">就应该保持沉默。”</span></span></p>
-        </blockquote>
-        <figcaption><span><span class="sr-only">—— </span>维特根斯坦<cite>《逻辑哲学论》</cite></span></figcaption>
-      </figure>
-    </div>
-  </section>
-
   <!-- ============================== Guestbook ============================== -->
   <section class="section guestbook" id="guestbook" aria-labelledby="guestbook-title">
     <div class="wrap">
@@ -1462,16 +1381,16 @@ html:not(.js) .theme-toggle { display: none; }
   var root = document.documentElement;
 
   /* ---- Noto Serif SC, subset to exactly the glyphs on the page ----------
-     Headings, titles and the quote use it; asking Google Fonts for only these characters keeps the
+     Headings and titles use it; asking Google Fonts for only these characters keeps the
      download to a few dozen KB instead of the full CJK family, and new titles are picked up automatically. */
   try {
     var seen = {}, glyphs = '';
-    document.querySelectorAll('.hero-role, .sec-title, .work-title, .pullquote p').forEach(function (el) {
+    document.querySelectorAll('.hero-role, .sec-title, .work-title').forEach(function (el) {
       Array.from(el.textContent).forEach(function (c) { if (!seen[c] && c.trim()) { seen[c] = 1; glyphs += c; } });
     });
     var serif = document.createElement('link');
     serif.rel = 'stylesheet';
-    serif.href = 'https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap&text=' + encodeURIComponent(glyphs);
+    serif.href = 'https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap&text=' + encodeURIComponent(glyphs);
     document.head.appendChild(serif);
   } catch (e) {}
 
