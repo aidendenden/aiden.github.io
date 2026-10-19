@@ -80,7 +80,7 @@ Follow the HTML comment just above `<ol class="works">`:
 | Frontend config | `index.html` → `var TWIKOO = { envId, version }` (near the top of the bottom `<script>`) |
 | Server URL (`envId`) | `https://twikoo.aidendenden.com`. Opening it should return `{"code":100,…,"version":"x.y.z"}` |
 | Server hosting | Vercel, team `aiden-aed9`, project `twikoo`; source repo `aidendenden/twikoo` (Twikoo's `templates/vercel-min`) |
-| Database | MongoDB Atlas free cluster `aiden`, user `twikoo` (readWriteAnyDatabase); IP access list `0.0.0.0/0` (Vercel has no fixed IPs) |
+| Database | MongoDB Atlas free cluster `aiden`, database **`test`** (collections `comment` = messages, `config` = Twikoo settings incl. hashed `ADMIN_PASS`), user `twikoo` (readWriteAnyDatabase); IP access list `0.0.0.0/0` (Vercel has no fixed IPs) |
 | Secret | Vercel project env var `MONGODB_URI` (Production). The password lives only there; it is not in this repo |
 | DNS | Tencent Cloud DNSPod, zone `aidendenden.com`: CNAME `twikoo` → `493c82622a1c0a87.vercel-dns-017.com`. Don't use the `*.vercel.app` URL: it's blocked in mainland China |
 | Admin panel | The gear icon in the guestbook. The owner sets the admin password there (moderation, spam filter, email notifications) |
@@ -103,6 +103,14 @@ How the frontend loads:
    You should see the comment box and a "Powered by Twikoo vX" footer, with no red error box.
    Don't post test comments on the live board.
 5. Commit and push as described above.
+
+### Reset the admin password
+Twikoo has no "change password" screen. The steps are:
+1. In Atlas → Data Explorer → `aiden` → `test` → `config`, delete the `ADMIN_PASS` field.
+   - Delete only that field, not the whole document. Deleting the document also wipes every other Twikoo setting.
+2. Right away, open the guestbook's gear icon and set a new password.
+   - Until a new password is set, anyone who opens the admin panel can claim it.
+   - The owner types the new password themselves.
 
 ### What needs the owner (agents can't do these)
 - Logging in to Vercel, Atlas or Tencent Cloud.
