@@ -934,7 +934,7 @@ html:not(.js) .theme-toggle { display: none; }
 }
 
 /* ==========================================================================
-   9b. Guestbook (giscus, loaded when the section comes near)
+   9b. Guestbook (Twikoo, loaded when the section comes near)
    ========================================================================== */
 .guestbook .grid { row-gap: var(--s-6); }
 .guestbook-rail { grid-column: 1 / span 3; }
@@ -946,16 +946,28 @@ html:not(.js) .theme-toggle { display: none; }
   font-size: var(--fs-lead);
   line-height: 1.8;
 }
-.giscus-box { margin-top: clamp(32px, 3vw + 12px, 56px); min-height: 160px; }
-.giscus-note {
+.guestbook-box { margin-top: clamp(32px, 3vw + 12px, 56px); min-height: 160px; }
+.guestbook-note {
   padding: var(--s-5) 0;
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   color: var(--ink-3);
   font-size: var(--fs-small);
 }
-.giscus-note a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
-.giscus-note[hidden] { display: none; }
+.guestbook-note a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+.guestbook-note[hidden] { display: none; }
+/* Twikoo ships a blue Element-style skin; bring it onto the page palette */
+.twikoo { color: var(--ink); font-size: 15px; }
+.twikoo .tk-button--primary { background: var(--ink); border-color: var(--ink); color: var(--paper); border-radius: var(--r-pill); }
+.twikoo .tk-button--primary.is-disabled,
+.twikoo .tk-button--primary.is-disabled:hover { background: var(--rule); border-color: transparent; color: var(--ink-3); }
+.twikoo .tk-button--text,
+.twikoo .tk-action-link,
+.twikoo .tk-action-icon,
+.twikoo .tk-actions button,
+.twikoo .tk-nick-link:hover,
+.twikoo .tk-sort-item { color: var(--accent); }
+.twikoo .tk-input__inner:focus { border-color: var(--accent); }
 
 /* ==========================================================================
    10. Footer
@@ -1398,10 +1410,10 @@ html:not(.js) .theme-toggle { display: none; }
         </div>
         <div class="guestbook-body reveal" style="--d:.1s">
           <h2 class="sec-title" id="guestbook-title">留言板 <span class="lat" lang="en">Guestbook</span></h2>
-          <p class="guestbook-line">想说点什么？用 GitHub 账号登录就可以留言。</p>
-          <div class="giscus-box">
-            <div class="giscus"></div>
-            <p class="giscus-note" id="giscus-note" hidden></p>
+          <p class="guestbook-line">想说点什么？留个昵称就可以留言。</p>
+          <div class="guestbook-box">
+            <div id="tcomment"></div>
+            <p class="guestbook-note" id="guestbook-note" hidden></p>
           </div>
         </div>
       </div>
@@ -1461,53 +1473,49 @@ html:not(.js) .theme-toggle { display: none; }
     document.head.appendChild(serif);
   } catch (e) {}
 
-  /* ---- Guestbook (giscus) ----------------------------------------------
-     Comments live in this repo's GitHub Discussions. Fill in the two IDs from https://giscus.app
-     (after enabling Discussions and installing the giscus app); until then the section says so. */
-  var GISCUS = {
-    repo: 'aidendenden/aiden.github.io',
-    repoId: '',
-    category: 'Announcements',
-    categoryId: ''
+  /* ---- Guestbook (Twikoo) ---------------------------------------------
+     Put the address of your Twikoo server in envId (e.g. https://twikoo.aidendenden.com);
+     until then the section says the guestbook is coming soon. */
+  var TWIKOO = {
+    envId: '',
+    version: '2.0.12'
   };
-  var giscusTheme = { light: 'noborder_light', dark: 'noborder_dark' };
-  var giscusNote = document.getElementById('giscus-note');
-  var discussionsUrl = 'https://github.com/' + GISCUS.repo + '/discussions';
-  function giscusMessage(html) { giscusNote.innerHTML = html; giscusNote.hidden = false; }
-  function setGiscusTheme(t) {
-    var frame = document.querySelector('iframe.giscus-frame');
-    if (frame) frame.contentWindow.postMessage({ giscus: { setConfig: { theme: giscusTheme[t] } } }, 'https://giscus.app');
+  var gbNote = document.getElementById('guestbook-note');
+  function guestbookMessage(html) { gbNote.innerHTML = html; gbNote.hidden = false; }
+  function guestbookFailed() {
+    guestbookMessage('留言板没有加载出来？也可以直接<a href="mailto:aidendenden233@outlook.com">发邮件</a>给我。');
   }
-  function loadGiscus() {
-    if (!GISCUS.repoId || !GISCUS.categoryId) { giscusMessage('留言板即将开放。'); return; }
+  function loadScript(urls, done, fail) {     // try each mirror in turn
+    if (!urls.length) return fail();
     var sc = document.createElement('script');
-    var attrs = {
-      'data-repo': GISCUS.repo, 'data-repo-id': GISCUS.repoId,
-      'data-category': GISCUS.category, 'data-category-id': GISCUS.categoryId,
-      'data-mapping': 'specific', 'data-term': 'guestbook', 'data-strict': '1',
-      'data-reactions-enabled': '1', 'data-emit-metadata': '0', 'data-input-position': 'top',
-      'data-theme': giscusTheme[current()], 'data-lang': 'zh-CN', 'data-loading': 'lazy'
-    };
-    sc.src = 'https://giscus.app/client.js';
+    sc.src = urls[0];
     sc.async = true;
-    sc.crossOrigin = 'anonymous';
-    for (var k in attrs) sc.setAttribute(k, attrs[k]);
-    sc.onerror = giscusFailed;
-    document.querySelector('.giscus').appendChild(sc);
-    // giscus.app can be unreachable from some networks (e.g. mainland China); offer the Discussions page instead
-    setTimeout(function () { if (!document.querySelector('iframe.giscus-frame')) giscusFailed(); }, 12000);
+    sc.onload = done;
+    sc.onerror = function () { sc.remove(); loadScript(urls.slice(1), done, fail); };
+    document.body.appendChild(sc);
   }
-  function giscusFailed() {
-    giscusMessage('留言板没有加载出来？也可以直接去 <a href="' + discussionsUrl + '" target="_blank" rel="noopener">GitHub 讨论区</a>留言。');
+  function loadTwikoo() {
+    if (!TWIKOO.envId) { guestbookMessage('留言板即将开放。'); return; }
+    var file = 'twikoo@' + TWIKOO.version + '/dist/twikoo.min.js';
+    loadScript([
+      'https://registry.npmmirror.com/twikoo/' + TWIKOO.version + '/files/dist/twikoo.min.js',   // fast in mainland China
+      'https://cdn.jsdelivr.net/npm/' + file,
+      'https://unpkg.com/' + file
+    ], function () {
+      try {
+        var p = window.twikoo.init({ envId: TWIKOO.envId, el: '#tcomment', path: '/guestbook', lang: 'zh-CN' });
+        if (p && p.catch) p.catch(guestbookFailed);
+      } catch (e) { guestbookFailed(); }
+    }, guestbookFailed);
   }
-  var gbox = document.querySelector('.giscus-box');
+  var gbox = document.querySelector('.guestbook-box');
   if (gbox) {
     if ('IntersectionObserver' in window) {
       var gio = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { gio.disconnect(); loadGiscus(); }
+        if (entries[0].isIntersecting) { gio.disconnect(); loadTwikoo(); }
       }, { rootMargin: '600px 0px' });
       gio.observe(gbox);
-    } else loadGiscus();
+    } else loadTwikoo();
   }
 
   /* ---- Theme toggle ---------------------------------------------------- */
@@ -1522,7 +1530,6 @@ html:not(.js) .theme-toggle { display: none; }
   function sync() {
     var t = current();
     toggle.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
-    setGiscusTheme(t);
     if (root.hasAttribute('data-theme')) {
       var metas = document.querySelectorAll('meta[name="theme-color"]');
       for (var i = 0; i < metas.length; i++) metas[i].setAttribute('content', metaColor[t]);
