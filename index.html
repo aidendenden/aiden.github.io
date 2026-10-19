@@ -934,6 +934,44 @@ html:not(.js) .theme-toggle { display: none; }
 }
 
 /* ==========================================================================
+   9b. Guestbook (Twikoo, loaded when the section comes near)
+   ========================================================================== */
+.guestbook .grid { row-gap: var(--s-6); }
+.guestbook-rail { grid-column: 1 / span 3; }
+.guestbook-body { grid-column: 5 / -1; padding-top: clamp(24px, 3vw, 48px); }
+.guestbook-line {
+  max-width: 30em;
+  margin-top: var(--s-5);
+  color: var(--ink-2);
+  font-size: var(--fs-lead);
+  line-height: 1.8;
+}
+.guestbook-box { margin-top: clamp(32px, 3vw + 12px, 56px); min-height: 160px; }
+.guestbook-note {
+  padding: var(--s-5) 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+}
+.guestbook-note a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+.guestbook-note[hidden] { display: none; }
+/* Twikoo ships a blue Element-style skin; bring it onto the page palette.
+   #tcomment raises specificity because Twikoo injects its stylesheet after this one. */
+#tcomment .twikoo { color: var(--ink); font-size: 15px; }
+#tcomment .twikoo .tk-button--primary { background: var(--ink); border-color: var(--ink); color: var(--paper); border-radius: var(--r-pill); }
+#tcomment .twikoo .tk-button--primary.is-disabled,
+#tcomment .twikoo .tk-button--primary.is-disabled:hover { background: var(--rule); border-color: transparent; color: var(--ink-3); }
+#tcomment .twikoo .tk-button--text,
+#tcomment .twikoo .tk-action-link,
+#tcomment .twikoo .tk-action-icon,
+#tcomment .twikoo .tk-actions button,
+#tcomment .twikoo .tk-nick-link:hover,
+#tcomment .twikoo .tk-sort-item,
+#tcomment .twikoo .tk-icon.__comments { color: var(--accent); }
+#tcomment .twikoo .tk-input__inner:focus { border-color: var(--accent); }
+
+/* ==========================================================================
    10. Footer
    ========================================================================== */
 .site-footer { padding-top: var(--section-y); padding-bottom: var(--s-7); }
@@ -1016,7 +1054,7 @@ html:not(.js) .theme-toggle { display: none; }
   }
   .hero-actions { margin-top: 0; }
 
-  .about-rail, .contact-rail { grid-column: 1 / span 4; }
+  .about-rail, .contact-rail, .guestbook-rail { grid-column: 1 / span 4; }
   .avatar { width: min(100%, 220px); }
 
   .work-head .sec-title { grid-column: 1 / -1; }
@@ -1044,8 +1082,8 @@ html:not(.js) .theme-toggle { display: none; }
 }
 
 @media (max-width: 899px) {
-  .about-rail, .contact-rail { grid-column: 1 / -1; }
-  .about-body, .contact-body { grid-column: 1 / -1; padding-top: 0; }
+  .about-rail, .contact-rail, .guestbook-rail { grid-column: 1 / -1; }
+  .about-body, .contact-body, .guestbook-body { grid-column: 1 / -1; padding-top: 0; }
   .avatar { width: 168px; margin-top: var(--s-6); }
 }
 
@@ -1107,7 +1145,7 @@ html:not(.js) .theme-toggle { display: none; }
   .works { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 379px) {
+@media (max-width: 429px) {      /* four nav links: the wordmark makes room on phones */
   .site-header .brand-name { display: none; }
   .site-header .brand { min-width: 44px; }
 }
@@ -1127,7 +1165,8 @@ html:not(.js) .theme-toggle { display: none; }
       <ul role="list">
         <li><a href="#about"><span class="n mono">01</span>关于</a></li>
         <li><a href="#work"><span class="n mono">02</span>作品</a></li>
-        <li><a href="#contact"><span class="n mono">03</span>联系</a></li>
+        <li><a href="#guestbook"><span class="n mono">03</span>留言</a></li>
+        <li><a href="#contact"><span class="n mono">04</span>联系</a></li>
       </ul>
     </nav>
     <button class="theme-toggle" type="button" aria-pressed="false" aria-label="深色模式" title="切换深色 / 浅色模式">
@@ -1364,12 +1403,31 @@ html:not(.js) .theme-toggle { display: none; }
     </div>
   </section>
 
+  <!-- ============================== Guestbook ============================== -->
+  <section class="section guestbook" id="guestbook" aria-labelledby="guestbook-title">
+    <div class="wrap">
+      <div class="grid section-top">
+        <div class="guestbook-rail reveal">
+          <p class="sec-no mono" aria-hidden="true"><b>03</b> — Guestbook</p>
+        </div>
+        <div class="guestbook-body reveal" style="--d:.1s">
+          <h2 class="sec-title" id="guestbook-title">留言板 <span class="lat" lang="en">Guestbook</span></h2>
+          <p class="guestbook-line">想说点什么？留个昵称就可以留言。</p>
+          <div class="guestbook-box">
+            <div id="tcomment"></div>
+            <p class="guestbook-note" id="guestbook-note" hidden></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================== Contact ============================== -->
   <section class="section contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
       <div class="grid section-top">
         <div class="contact-rail reveal">
-          <p class="sec-no mono" aria-hidden="true"><b>03</b> — Contact</p>
+          <p class="sec-no mono" aria-hidden="true"><b>04</b> — Contact</p>
         </div>
         <div class="contact-body reveal" style="--d:.1s">
           <h2 class="sec-title" id="contact-title">联系 <span class="lat" lang="en">Contact</span></h2>
@@ -1416,6 +1474,51 @@ html:not(.js) .theme-toggle { display: none; }
     serif.href = 'https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap&text=' + encodeURIComponent(glyphs);
     document.head.appendChild(serif);
   } catch (e) {}
+
+  /* ---- Guestbook (Twikoo) ---------------------------------------------
+     Put the address of your Twikoo server in envId (e.g. https://twikoo.aidendenden.com);
+     until then the section says the guestbook is coming soon. */
+  var TWIKOO = {
+    envId: 'https://twikoo.aidendenden.com',
+    version: '2.0.15'   // keep in step with the server version shown at the envId address
+  };
+  var gbNote = document.getElementById('guestbook-note');
+  function guestbookMessage(html) { gbNote.innerHTML = html; gbNote.hidden = false; }
+  function guestbookFailed() {
+    guestbookMessage('留言板没有加载出来？也可以直接<a href="mailto:aidendenden233@outlook.com">发邮件</a>给我。');
+  }
+  function loadScript(urls, done, fail) {     // try each mirror in turn
+    if (!urls.length) return fail();
+    var sc = document.createElement('script');
+    sc.src = urls[0];
+    sc.async = true;
+    sc.onload = done;
+    sc.onerror = function () { sc.remove(); loadScript(urls.slice(1), done, fail); };
+    document.body.appendChild(sc);
+  }
+  function loadTwikoo() {
+    if (!TWIKOO.envId) { guestbookMessage('留言板即将开放。'); return; }
+    var file = 'twikoo@' + TWIKOO.version + '/dist/twikoo.min.js';
+    loadScript([
+      'https://registry.npmmirror.com/twikoo/' + TWIKOO.version + '/files/dist/twikoo.min.js',   // fast in mainland China
+      'https://cdn.jsdelivr.net/npm/' + file,
+      'https://unpkg.com/' + file
+    ], function () {
+      try {
+        var p = window.twikoo.init({ envId: TWIKOO.envId, el: '#tcomment', path: '/guestbook', lang: 'zh-CN' });
+        if (p && p.catch) p.catch(guestbookFailed);
+      } catch (e) { guestbookFailed(); }
+    }, guestbookFailed);
+  }
+  var gbox = document.querySelector('.guestbook-box');
+  if (gbox) {
+    if ('IntersectionObserver' in window) {
+      var gio = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { gio.disconnect(); loadTwikoo(); }
+      }, { rootMargin: '600px 0px' });
+      gio.observe(gbox);
+    } else loadTwikoo();
+  }
 
   /* ---- Theme toggle ---------------------------------------------------- */
   var toggle = document.querySelector('.theme-toggle');
@@ -1495,7 +1598,7 @@ html:not(.js) .theme-toggle { display: none; }
         }
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['about', 'work', 'contact'].forEach(function (id) { var s = document.getElementById(id); if (s) spy.observe(s); });
+    ['about', 'work', 'guestbook', 'contact'].forEach(function (id) { var s = document.getElementById(id); if (s) spy.observe(s); });
   }
 
   window.__revealReady = true;
