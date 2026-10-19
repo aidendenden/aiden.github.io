@@ -956,18 +956,20 @@ html:not(.js) .theme-toggle { display: none; }
 }
 .guestbook-note a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
 .guestbook-note[hidden] { display: none; }
-/* Twikoo ships a blue Element-style skin; bring it onto the page palette */
-.twikoo { color: var(--ink); font-size: 15px; }
-.twikoo .tk-button--primary { background: var(--ink); border-color: var(--ink); color: var(--paper); border-radius: var(--r-pill); }
-.twikoo .tk-button--primary.is-disabled,
-.twikoo .tk-button--primary.is-disabled:hover { background: var(--rule); border-color: transparent; color: var(--ink-3); }
-.twikoo .tk-button--text,
-.twikoo .tk-action-link,
-.twikoo .tk-action-icon,
-.twikoo .tk-actions button,
-.twikoo .tk-nick-link:hover,
-.twikoo .tk-sort-item { color: var(--accent); }
-.twikoo .tk-input__inner:focus { border-color: var(--accent); }
+/* Twikoo ships a blue Element-style skin; bring it onto the page palette.
+   #tcomment raises specificity because Twikoo injects its stylesheet after this one. */
+#tcomment .twikoo { color: var(--ink); font-size: 15px; }
+#tcomment .twikoo .tk-button--primary { background: var(--ink); border-color: var(--ink); color: var(--paper); border-radius: var(--r-pill); }
+#tcomment .twikoo .tk-button--primary.is-disabled,
+#tcomment .twikoo .tk-button--primary.is-disabled:hover { background: var(--rule); border-color: transparent; color: var(--ink-3); }
+#tcomment .twikoo .tk-button--text,
+#tcomment .twikoo .tk-action-link,
+#tcomment .twikoo .tk-action-icon,
+#tcomment .twikoo .tk-actions button,
+#tcomment .twikoo .tk-nick-link:hover,
+#tcomment .twikoo .tk-sort-item,
+#tcomment .twikoo .tk-icon.__comments { color: var(--accent); }
+#tcomment .twikoo .tk-input__inner:focus { border-color: var(--accent); }
 
 /* ==========================================================================
    10. Footer
@@ -1477,8 +1479,8 @@ html:not(.js) .theme-toggle { display: none; }
      Put the address of your Twikoo server in envId (e.g. https://twikoo.aidendenden.com);
      until then the section says the guestbook is coming soon. */
   var TWIKOO = {
-    envId: '',
-    version: '2.0.12'
+    envId: 'https://twikoo.aidendenden.com',
+    version: '2.0.15'   // keep in step with the server version shown at the envId address
   };
   var gbNote = document.getElementById('guestbook-note');
   function guestbookMessage(html) { gbNote.innerHTML = html; gbNote.hidden = false; }
